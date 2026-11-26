@@ -5,14 +5,36 @@ include '../db.php';
 
 $site = isset($_GET['site']) ? htmlspecialchars($_GET['site']) : '';
 
-if ($site == "login") {
-    include '../login.php';
-} elseif ($site == "logout") {
-    include '../logout.php';
-} else {
+switch ($site) {
+    case 'login':
+        include '../requests/login.php';
+        break;
+    case 'logout':
+        include '../requests/logout.php';
+        break;
+    case 'newtool':
+        include '../requests/tools.php';
+        break;
+    default: break;
+}
+
     if (isset($_SESSION['user'])): ?>
-    <a href="?site=logout">Logout</a>
+    <a href="?site=tools">Werkzeuge</a>
+    <a href="?site=logout">Logout</a><br><br>
     <?php else: ?>
-    <a href="?site=login">Login</a>
+    <a href="?site=login">Login</a><br><br>
     <?php endif;
+
+switch ($site) {
+    case 'login':
+        include '../sites/login.php';
+        break;
+    case 'tools':
+        include '../sites/tools.php';
+        break;
+    case 'newtool':
+        include '../sites/newtool.php';
+        break;
+    default:
+        break;
 }
