@@ -12,6 +12,8 @@ switch ($site) {
     case 'logout':
         include '../requests/logout.php';
         break;
+    case 'tools':
+    case 'edittool':
     case 'newtool':
         include '../requests/tools.php';
         break;
@@ -39,6 +41,7 @@ switch ($site) {
         include '../sites/tools.php';
         break;
     case 'newtool':
+    case 'edittool':
         include '../sites/newtool.php';
         break;
     case 'newcustomer':

@@ -10,6 +10,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`) VALUES (NULL, 'testuser', '$2y$10$y5cZWZdXr8QBCMxj5lil5ulBpgZlSZzARElCe7zDGr4BnH.XTvKji');
 
+-- Die spätere Ausleihtabelle muss tool(id) per Fremdschlüssel mit ON DELETE RESTRICT referenzieren.
 CREATE TABLE IF NOT EXISTS `tool` (
   `id` int NOT NULL AUTO_INCREMENT,
   `inventoryid` varchar(255) NOT NULL,
