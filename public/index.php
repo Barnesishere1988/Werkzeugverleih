@@ -15,6 +15,8 @@ switch ($site) {
     case 'newtool':
         include '../requests/tools.php';
         break;
+    case 'customers':
+    case 'editcustomer':
     case 'newcustomer':
         include '../requests/customers.php';
         break;
@@ -23,7 +25,7 @@ switch ($site) {
 
     if (isset($_SESSION['user'])): ?>
     <a href="?site=tools">Werkzeuge</a>
-    <a href="?site=newcustomer">Kunde anlegen</a>
+    <a href="?site=customers">Kunden</a>
     <a href="?site=logout">Logout</a><br><br>
     <?php else: ?>
     <a href="?site=login">Login</a><br><br>
@@ -40,7 +42,11 @@ switch ($site) {
         include '../sites/newtool.php';
         break;
     case 'newcustomer':
+    case 'editcustomer':
         include '../sites/newcustomer.php';
+        break;
+    case 'customers':
+        include '../sites/customers.php';
         break;
     default:
         break;

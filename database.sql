@@ -21,11 +21,13 @@ CREATE TABLE IF NOT EXISTS `tool` (
   UNIQUE KEY (`inventoryid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Die spätere Ausleihtabelle soll customer(id) per Fremdschlüssel mit ON DELETE RESTRICT referenzieren.
 CREATE TABLE IF NOT EXISTS `customer` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(50) NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
