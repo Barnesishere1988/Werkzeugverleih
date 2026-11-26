@@ -22,6 +22,9 @@ switch ($site) {
     case 'newcustomer':
         include '../requests/customers.php';
         break;
+    case 'newloan':
+        include '../requests/loans.php';
+        break;
     default: break;
 }
 
@@ -50,6 +53,9 @@ switch ($site) {
         break;
     case 'customers':
         include '../sites/customers.php';
+        break;
+    case 'newloan':
+        include '../sites/newloan.php';
         break;
     default:
         break;

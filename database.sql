@@ -10,7 +10,6 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`) VALUES (NULL, 'testuser', '$2y$10$y5cZWZdXr8QBCMxj5lil5ulBpgZlSZzARElCe7zDGr4BnH.XTvKji');
 
--- Die spätere Ausleihtabelle muss tool(id) per Fremdschlüssel mit ON DELETE RESTRICT referenzieren.
 CREATE TABLE IF NOT EXISTS `tool` (
   `id` int NOT NULL AUTO_INCREMENT,
   `inventoryid` varchar(255) NOT NULL,
@@ -22,7 +21,6 @@ CREATE TABLE IF NOT EXISTS `tool` (
   UNIQUE KEY (`inventoryid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Die spätere Ausleihtabelle soll customer(id) per Fremdschlüssel mit ON DELETE RESTRICT referenzieren.
 CREATE TABLE IF NOT EXISTS `customer` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) NOT NULL,
@@ -31,4 +29,19 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `phone` varchar(50) NOT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS `loan` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `tool_id` int NOT NULL,
+  `start_date` date NOT NULL,
+  `planned_return_date` date NOT NULL,
+  `return_date` date DEFAULT NULL,
+  `daily_price` decimal(10,2) NOT NULL,
+  `active_tool_id` int GENERATED ALWAYS AS (CASE WHEN `return_date` IS NULL THEN `tool_id` ELSE NULL END) STORED,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`active_tool_id`),
+  FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE RESTRICT,
+  FOREIGN KEY (`tool_id`) REFERENCES `tool` (`id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

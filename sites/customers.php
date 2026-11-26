@@ -26,6 +26,7 @@
                     <td><?= htmlspecialchars($customer['email']) ?></td>
                     <td><?= htmlspecialchars($customer['phone']) ?></td>
                     <td>
+                        <a href="?site=newloan&amp;id=<?= (int) $customer['id'] ?>">Werkzeug ausleihen</a>
                         <a href="?site=editcustomer&amp;id=<?= (int) $customer['id'] ?>">Bearbeiten</a>
                         <form action="?site=customers" method="post" onsubmit="return confirm('Diesen Kunden löschen?');">
                             <input type="hidden" name="id" value="<?= (int) $customer['id'] ?>">
