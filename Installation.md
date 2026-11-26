@@ -1,0 +1,2 @@
+- Führe alle befehle der database.sql aus
+- Der testuser hat das Passwort test123
